@@ -459,24 +459,18 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
               _cardChangeController.status != AnimationStatus.forward
                   ? SizedBox.expand(
                       child: GestureDetector(
-                        onPanDown: (DragDownDetails details) {
+                        onVerticalDragDown: (DragDownDetails details) {
                           print('onPanDown');
                           stop();
                         },
-                        onPanUpdate: (DragUpdateDetails details) {
+                        onVerticalDragUpdate: (DragUpdateDetails details) {
                           print('onPanUpdate');
                           updateFrontCardAlignment(details, size);
                         },
-                        onPanEnd: (DragEndDetails details) {
+                        onVerticalDragEnd: (DragEndDetails details) {
                           print('onPanEnd');
                           judgeRunAnimation(details, size);
                         },
-                        onHorizontalDragDown: (DragDownDetails details) {},
-                        onHorizontalDragUpdate: (DragUpdateDetails details) {},
-                        onHorizontalDragEnd: (DragEndDetails details) {},
-                        onVerticalDragDown: (DragDownDetails details) {},
-                        onVerticalDragUpdate: (DragUpdateDetails details) {},
-                        onVerticalDragEnd: (DragEndDetails details) {},
                       ),
                     )
                   : IgnorePointer(),

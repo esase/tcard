@@ -353,7 +353,7 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     print(isSwipRight);
 
     if (widget.callback != null) {
-      widget.callback(isSwipLeft, isSwipRight);
+      widget?.callback(isSwipLeft, isSwipRight);
     }
 
     setState(() {});

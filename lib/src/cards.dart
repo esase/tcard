@@ -40,6 +40,7 @@ class TCard extends StatefulWidget {
   final int delaySlideFor;
 
   final Function? callback;
+  final Function? callback2;
 
   const TCard({
     required this.cards,
@@ -51,6 +52,7 @@ class TCard extends StatefulWidget {
     this.slideSpeed = 20,
     this.delaySlideFor = 500,
     this.callback,
+    this.callback2,
     this.size = const Size(380, 400),
   })  : assert(cards != null),
         assert(cards.length > 0);
@@ -366,6 +368,10 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     final double limit = 10.0;
     final bool isSwipLeft = _frontCardAlignment.x < -limit;
     final bool isSwipRight = _frontCardAlignment.x > limit;
+
+    if (widget.callback2 != null) {
+      widget.callback2?.call();
+    }
 
     // 判断是否运行向前的动画，否则回弹
     if (isSwipLeft || isSwipRight) {

@@ -357,12 +357,12 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     final bool isSwipLeft = _frontCardAlignment.x < -limit;
     final bool isSwipRight = _frontCardAlignment.x > limit;
 
+    if (widget.dragStopCallback != null) {
+      widget.dragStopCallback?.call(isSwipLeft, isSwipRight);
+    }
+
     // 判断是否运行向前的动画，否则回弹
     if (isSwipLeft || isSwipRight) {
-      if (widget.dragStopCallback != null) {
-        widget.dragStopCallback?.call(isSwipLeft, isSwipRight);
-      }
-
       _runChangeOrderAnimation();
       if (isSwipLeft) {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Left));

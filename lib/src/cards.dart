@@ -340,9 +340,17 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
 
     // 设置最前面卡片的旋转角度
     _frontCardRotation = _frontCardAlignment.x;
+
+    final double limit = 10.0;
+    final bool isSwipLeft = _frontCardAlignment.x < -limit;
+    final bool isSwipRight = _frontCardAlignment.x > limit;
+
+    final bool isSwipLeft = _frontCardAlignment.x < -limit;
+    final bool isSwipRight = _frontCardAlignment.x > limit;
+
     print('---updateFrontCardAlignment--');
-    final a = DismissDirection.endToStart ? 1 : -1;
-    print(a);
+    print(isSwipLeft);
+    print(isSwipRight);
 
     setState(() {});
   }
@@ -449,15 +457,15 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
                       child: GestureDetector(
                         onPanDown: (DragDownDetails details) {
                           print('onPanDown');
-                          _stop();
+                          stop();
                         },
                         onPanUpdate: (DragUpdateDetails details) {
                           print('onPanUpdate');
-                          _updateFrontCardAlignment(details, size);
+                          updateFrontCardAlignment(details, size);
                         },
                         onPanEnd: (DragEndDetails details) {
                           print('onPanEnd');
-                          _judgeRunAnimation(details, size);
+                          judgeRunAnimation(details, size);
                         },
                         onHorizontalDragDown: (DragDownDetails details) {},
                         onHorizontalDragUpdate: (DragUpdateDetails details) {},

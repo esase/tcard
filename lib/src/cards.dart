@@ -347,16 +347,9 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     // 设置最前面卡片的旋转角度
     _frontCardRotation = _frontCardAlignment.x;
 
-    final double limit = 5.0;
-    final bool isSwipLeft = _frontCardAlignment.x < -limit;
-    final bool isSwipRight = _frontCardAlignment.x > limit;
-
-    // print('---updateFrontCardAlignment--');
-    // print(isSwipLeft);
-    // print(isSwipRight);
-
     if (widget.callback != null) {
-      widget.callback?.call(isSwipLeft, isSwipRight);
+      widget.callback
+          ?.call((_frontCardAlignment.x < 0), (_frontCardAlignment.x > 0));
     }
 
     setState(() {});

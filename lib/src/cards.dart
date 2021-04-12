@@ -340,6 +340,7 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
 
     // 设置最前面卡片的旋转角度
     _frontCardRotation = _frontCardAlignment.x;
+    print('---updateFrontCardAlignment--');
     setState(() {});
   }
 
@@ -355,8 +356,10 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
       _runChangeOrderAnimation();
       if (isSwipLeft) {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Left));
+        print('--- judgeRunAnimation left --- ');
       } else {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Right));
+         print('--- judgeRunAnimation right --- ');
       }
     } else {
       _runReboundAnimation(details.velocity.pixelsPerSecond, size);
@@ -442,27 +445,12 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
                   ? SizedBox.expand(
                       child: GestureDetector(
                         onHorizontalDragDown: (DragDownDetails details) {
-                          print('onPanDown~');
                           stop();
                         },
                         onHorizontalDragUpdate: (DragUpdateDetails details) {
-                          print('onPanUpdate~');
                           updateFrontCardAlignment(details, size);
                         },
                         onHorizontalDragEnd: (DragEndDetails details) {
-                          print('onPanEnd~~');
-                          judgeRunAnimation(details, size);
-                        },
-                        onVerticalDragDown: (DragDownDetails details) {
-                          print('onPanDown~1');
-                          stop();
-                        },
-                        onVerticalDragUpdate: (DragUpdateDetails details) {
-                          print('onPanUpdate~1');
-                          updateFrontCardAlignment(details, size);
-                        },
-                        onVerticalDragEnd: (DragEndDetails details) {
-                          print('onPanEnd~~1');
                           judgeRunAnimation(details, size);
                         },
                       ),

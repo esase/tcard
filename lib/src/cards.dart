@@ -348,9 +348,9 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     final bool isSwipLeft = _frontCardAlignment.x < -limit;
     final bool isSwipRight = _frontCardAlignment.x > limit;
 
-    print('---updateFrontCardAlignment--');
-    print(isSwipLeft);
-    print(isSwipRight);
+    // print('---updateFrontCardAlignment--');
+    // print(isSwipLeft);
+    // print(isSwipRight);
 
     if (widget.callback != null) {
       widget.callback?.call(isSwipLeft, isSwipRight);
@@ -371,10 +371,10 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
       _runChangeOrderAnimation();
       if (isSwipLeft) {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Left));
-        print('--- judgeRunAnimation left --- ');
+        // print('--- judgeRunAnimation left --- ');
       } else {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Right));
-        print('--- judgeRunAnimation right --- ');
+        // print('--- judgeRunAnimation right --- ');
       }
     } else {
       _runReboundAnimation(details.velocity.pixelsPerSecond, size);

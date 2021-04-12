@@ -6,6 +6,8 @@ import 'animations.dart';
 import 'controller.dart';
 import 'swip_info.dart';
 
+typedef DragCallback(bool isLeft, bool isRight);
+typedef DragStopCallback(bool isLeft, bool isRight);
 typedef ForwardCallback(int index, SwipInfo info);
 typedef BackCallback(int index, SwipInfo info);
 typedef EndCallback();
@@ -30,17 +32,14 @@ class TCard extends StatefulWidget {
   /// 卡片控制器
   final TCardController? controller;
 
-  /// 控制Y轴
-  // final bool lockYAxis;
-
   /// How quick should it be slided? less is slower. 10 is a bit slow. 20 is a quick enough.
   final double slideSpeed;
 
   /// How long does it have to wait until the next slide is sliable? less is quicker. 100 is fast enough. 500 is a bit slow.
   final int delaySlideFor;
 
-  final Function? callback;
-  final Function? callback2;
+  final DragCallback? dragCallback;
+  final DragStopCallback? dragStopCallback;
 
   const TCard({
     required this.cards,
@@ -48,11 +47,10 @@ class TCard extends StatefulWidget {
     this.onForward,
     this.onBack,
     this.onEnd,
-    // this.lockYAxis = false,
     this.slideSpeed = 20,
     this.delaySlideFor = 500,
-    this.callback,
-    this.callback2,
+    this.dragCallback,
+    this.dragStopCallback,
     this.size = const Size(380, 400),
   })  : assert(cards != null),
         assert(cards.length > 0);
@@ -339,16 +337,13 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     _frontCardAlignment += Alignment(
       details.delta.dx / (size.width / 2) * widget.slideSpeed,
       0,
-      // widget.lockYAxis
-      //     ? 0
-      //     : details.delta.dy / (size.height / 2) * widget.slideSpeed,
     );
 
     // 设置最前面卡片的旋转角度
     _frontCardRotation = _frontCardAlignment.x;
 
-    if (widget.callback != null) {
-      widget.callback
+    if (widget.dragCallback != null) {
+      widget.dragCallback
           ?.call((_frontCardAlignment.x < 0), (_frontCardAlignment.x > 0));
     }
 
@@ -362,12 +357,12 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     final bool isSwipLeft = _frontCardAlignment.x < -limit;
     final bool isSwipRight = _frontCardAlignment.x > limit;
 
-    if (widget.callback2 != null) {
-      widget.callback2?.call();
-    }
-
     // 判断是否运行向前的动画，否则回弹
     if (isSwipLeft || isSwipRight) {
+      if (widget.dragStopCallback != null) {
+        widget.dragStopCallback?.call(isSwipLeft, isSwipRight);
+      }
+
       _runChangeOrderAnimation();
       if (isSwipLeft) {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Left));

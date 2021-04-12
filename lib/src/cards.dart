@@ -366,10 +366,8 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
       _runChangeOrderAnimation();
       if (isSwipLeft) {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Left));
-        // print('--- judgeRunAnimation left --- ');
       } else {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Right));
-        // print('--- judgeRunAnimation right --- ');
       }
     } else {
       _runReboundAnimation(details.velocity.pixelsPerSecond, size);
@@ -455,15 +453,12 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
                   ? SizedBox.expand(
                       child: GestureDetector(
                         onHorizontalDragDown: (DragDownDetails details) {
-                          // print('onPanDown');
                           stop();
                         },
                         onHorizontalDragUpdate: (DragUpdateDetails details) {
-                          // print('onPanUpdate');
                           updateFrontCardAlignment(details, size);
                         },
                         onHorizontalDragEnd: (DragEndDetails details) {
-                          // print('onPanEnd');
                           judgeRunAnimation(details, size);
                         },
                       ),

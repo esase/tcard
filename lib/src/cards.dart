@@ -39,6 +39,8 @@ class TCard extends StatefulWidget {
   /// How long does it have to wait until the next slide is sliable? less is quicker. 100 is fast enough. 500 is a bit slow.
   final int delaySlideFor;
 
+final Function callback;
+
   const TCard({
     required this.cards,
     this.controller,
@@ -48,6 +50,8 @@ class TCard extends StatefulWidget {
     this.lockYAxis = false,
     this.slideSpeed = 20,
     this.delaySlideFor = 500,
+    this.callback,
+    this.
     this.size = const Size(380, 400),
   })  : assert(cards != null),
         assert(cards.length > 0);
@@ -345,12 +349,13 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     final bool isSwipLeft = _frontCardAlignment.x < -limit;
     final bool isSwipRight = _frontCardAlignment.x > limit;
 
-    final bool isSwipLeft = _frontCardAlignment.x < -limit;
-    final bool isSwipRight = _frontCardAlignment.x > limit;
-
     print('---updateFrontCardAlignment--');
     print(isSwipLeft);
     print(isSwipRight);
+
+  if (widget.callback != null) {
+    widget.callback(isSwipLeft, isSwipRight);
+  }
 
     setState(() {});
   }

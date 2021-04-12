@@ -442,15 +442,15 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
                   ? SizedBox.expand(
                       child: GestureDetector(
                         onHorizontalDragDown: (DragDownDetails details) {
-                          print('onPanDown!!!');
+                          print('onPanDown~');
                           stop();
                         },
                         onHorizontalDragUpdate: (DragUpdateDetails details) {
-                           print('onPanUpdate!!!');
+                           print('onPanUpdate~');
                           updateFrontCardAlignment(details, size);
                         },
                         onHorizontalDragEnd: (DragEndDetails details) {
-                          print('onPanEnd!!!');
+                          print('onPanEnd~~');
                           judgeRunAnimation(details, size);
                         },
                       ),

@@ -31,7 +31,7 @@ class TCard extends StatefulWidget {
   final TCardController? controller;
 
   /// 控制Y轴
-  final bool lockYAxis;
+  // final bool lockYAxis;
 
   /// How quick should it be slided? less is slower. 10 is a bit slow. 20 is a quick enough.
   final double slideSpeed;
@@ -47,7 +47,7 @@ class TCard extends StatefulWidget {
     this.onForward,
     this.onBack,
     this.onEnd,
-    this.lockYAxis = false,
+    // this.lockYAxis = false,
     this.slideSpeed = 20,
     this.delaySlideFor = 500,
     this.callback,
@@ -336,9 +336,10 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     // 卡片移动速度 widget.slideSpeed
     _frontCardAlignment += Alignment(
       details.delta.dx / (size.width / 2) * widget.slideSpeed,
-      widget.lockYAxis
-          ? 0
-          : details.delta.dy / (size.height / 2) * widget.slideSpeed,
+      0,
+      // widget.lockYAxis
+      //     ? 0
+      //     : details.delta.dy / (size.height / 2) * widget.slideSpeed,
     );
 
     // 设置最前面卡片的旋转角度
@@ -460,15 +461,15 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
                   ? SizedBox.expand(
                       child: GestureDetector(
                         onHorizontalDragDown: (DragDownDetails details) {
-                          print('onPanDown');
+                          // print('onPanDown');
                           stop();
                         },
                         onHorizontalDragUpdate: (DragUpdateDetails details) {
-                          print('onPanUpdate');
+                          // print('onPanUpdate');
                           updateFrontCardAlignment(details, size);
                         },
                         onHorizontalDragEnd: (DragEndDetails details) {
-                          print('onPanEnd');
+                          // print('onPanEnd');
                           judgeRunAnimation(details, size);
                         },
                       ),

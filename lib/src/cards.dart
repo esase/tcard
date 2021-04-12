@@ -446,11 +446,23 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
                           stop();
                         },
                         onHorizontalDragUpdate: (DragUpdateDetails details) {
-                           print('onPanUpdate~');
+                          print('onPanUpdate~');
                           updateFrontCardAlignment(details, size);
                         },
                         onHorizontalDragEnd: (DragEndDetails details) {
                           print('onPanEnd~~');
+                          judgeRunAnimation(details, size);
+                        },
+                        onVerticalDragDown: (DragDownDetails details) {
+                          print('onPanDown~1');
+                          stop();
+                        },
+                        onVerticalDragUpdate: (DragUpdateDetails details) {
+                          print('onPanUpdate~1');
+                          updateFrontCardAlignment(details, size);
+                        },
+                        onVerticalDragEnd: (DragEndDetails details) {
+                          print('onPanEnd~~1');
                           judgeRunAnimation(details, size);
                         },
                       ),

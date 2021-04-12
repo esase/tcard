@@ -322,14 +322,14 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
   }
 
   // Stop animations
-  void _stop() {
+  void stop() {
     _reboundController.stop();
     _cardChangeController.stop();
     _cardReverseController.stop();
   }
 
   // 更新最前面卡片的位置
-  void _updateFrontCardAlignment(DragUpdateDetails details, Size size) {
+  void updateFrontCardAlignment(DragUpdateDetails details, Size size) {
     // 卡片移动速度 widget.slideSpeed
     _frontCardAlignment += Alignment(
       details.delta.dx / (size.width / 2) * widget.slideSpeed,
@@ -344,7 +344,7 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
   }
 
   // 判断是否进行动画
-  void _judgeRunAnimation(DragEndDetails details, Size size) {
+  void judgeRunAnimation(DragEndDetails details, Size size) {
     // 卡片横轴距离限制
     final double limit = 10.0;
     final bool isSwipLeft = _frontCardAlignment.x < -limit;
@@ -443,15 +443,15 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
                       child: GestureDetector(
                         onPanDown: (DragDownDetails details) {
                           print('onPanDown!!!');
-                          _stop();
+                          stop();
                         },
                         onPanUpdate: (DragUpdateDetails details) {
                            print('onPanUpdate!!!');
-                          _updateFrontCardAlignment(details, size);
+                          updateFrontCardAlignment(details, size);
                         },
                         onPanEnd: (DragEndDetails details) {
                           print('onPanEnd!!!');
-                          _judgeRunAnimation(details, size);
+                          judgeRunAnimation(details, size);
                         },
                       ),
                     )

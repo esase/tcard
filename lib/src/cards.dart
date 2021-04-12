@@ -39,7 +39,7 @@ class TCard extends StatefulWidget {
   /// How long does it have to wait until the next slide is sliable? less is quicker. 100 is fast enough. 500 is a bit slow.
   final int delaySlideFor;
 
-  final Function callback;
+  final Function? callback;
 
   const TCard({
     required this.cards,

@@ -341,6 +341,9 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     // 设置最前面卡片的旋转角度
     _frontCardRotation = _frontCardAlignment.x;
     print('---updateFrontCardAlignment--');
+    final a = DismissDirection.endToStart ? 1 : -1;
+    print(a);
+
     setState(() {});
   }
 
@@ -359,7 +362,7 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
         print('--- judgeRunAnimation left --- ');
       } else {
         _swipInfoList.add(SwipInfo(_frontCardIndex, SwipDirection.Right));
-         print('--- judgeRunAnimation right --- ');
+        print('--- judgeRunAnimation right --- ');
       }
     } else {
       _runReboundAnimation(details.velocity.pixelsPerSecond, size);
@@ -444,15 +447,24 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
               _cardChangeController.status != AnimationStatus.forward
                   ? SizedBox.expand(
                       child: GestureDetector(
-                        onHorizontalDragDown: (DragDownDetails details) {
-                          stop();
+                        onPanDown: (DragDownDetails details) {
+                          print('onPanDown');
+                          _stop();
                         },
-                        onHorizontalDragUpdate: (DragUpdateDetails details) {
-                          updateFrontCardAlignment(details, size);
+                        onPanUpdate: (DragUpdateDetails details) {
+                          print('onPanUpdate');
+                          _updateFrontCardAlignment(details, size);
                         },
-                        onHorizontalDragEnd: (DragEndDetails details) {
-                          judgeRunAnimation(details, size);
+                        onPanEnd: (DragEndDetails details) {
+                          print('onPanEnd');
+                          _judgeRunAnimation(details, size);
                         },
+                        onHorizontalDragDown: (DragDownDetails details) {},
+                        onHorizontalDragUpdate: (DragUpdateDetails details) {},
+                        onHorizontalDragEnd: (DragEndDetails details) {},
+                        onVerticalDragDown: (DragDownDetails details) {},
+                        onVerticalDragUpdate: (DragUpdateDetails details) {},
+                        onVerticalDragEnd: (DragEndDetails details) {},
                       ),
                     )
                   : IgnorePointer(),

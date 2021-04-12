@@ -20,8 +20,8 @@ class CardSizes {
 /// Card Alignments
 class CardAlignments {
   static Alignment front = Alignment(0.0, -0.5);
-  static Alignment middle = Alignment(0.0, 0.0);
-  static Alignment back = Alignment(0.0, 0.5);
+  static Alignment middle = Alignment(0.0, -0.5);
+  static Alignment back = Alignment(0.0, -0.5);
 }
 
 /// Card Forward Animations
